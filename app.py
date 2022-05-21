@@ -23,7 +23,7 @@ def getMangas():
 def getMangasByName(name):
     cur = db.connection.cursor()
     cur.execute('''SELECT * FROM manga
-                WHERE manga.name="{}"'''.format(name))
+                WHERE manga.name LIKE "%{}%"'''.format(name))
     data = cur.fetchall()
     return jsonify(data)
 
@@ -33,14 +33,6 @@ def getMangaById(id):
     cur = db.connection.cursor()
     cur.execute('''SELECT * FROM manga
                 WHERE manga.id={}'''.format(id))
-    data = cur.fetchall()
-    return jsonify(data)
-
-@app.route('/getMangasNameList')
-@cross_origin()
-def getMangasNameList():
-    cur = db.connection.cursor()
-    cur.execute('''SELECT name, id FROM manga''')
     data = cur.fetchall()
     return jsonify(data)
 
