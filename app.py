@@ -94,8 +94,8 @@ CLICK PARA CONFIRMAR PEDIDO: https://moshimoshi-server.herokuapp.com/confirmOrde
     body = "Subject: {}\r\n{}".format(subject,message)
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    server.login("nayenjoaquin@gmail.com","kbffafdlcafkvcxq")
-    server.sendmail("noreply@gmail.com", "nayenjoaquin@gmail.com", body.encode('utf-8'))
+    server.login("mangasmoshimoshi@gmail.com","xqnktwaiwvarfafy")
+    server.sendmail("noreply@gmail.com", "mangasmoshimoshi@gmail.com", body.encode('utf-8'))
 
 @app.route('/confirmOrder/<orderId>')
 def confirmOrder(orderId):
