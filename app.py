@@ -24,13 +24,20 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(func=cleanOrders, trigger="interval", days=2)
 scheduler.start()
 
-@app.route('/getMangas')
-def getMangas():
+
+@app.route('/getMangasByPage/<page>')
+def getMangasByPage(page):
     cur = db.connection.cursor()
-    cur.execute('''SELECT * FROM manga''')
+    cur.execute('''SELECT * FROM manga LIMIT 40 OFFSET {}'''.format((int(page)-1)*40))
     data = cur.fetchall()
     return jsonify(data)
 
+@app.route('/getMangasNameList')
+def getMangasNameList():
+    cur = db.connection.cursor()
+    cur.execute('''SELECT name,id FROM manga''')
+    data = cur.fetchall()
+    return jsonify(data)
 
 @app.route('/getMangasByName/<name>')
 def getMangasByName(name):
