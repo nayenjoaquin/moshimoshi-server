@@ -28,7 +28,7 @@ scheduler.start()
 @app.route('/getMangasByPage/<page>')
 def getMangasByPage(page):
     cur = db.connection.cursor()
-    cur.execute('''SELECT * FROM manga LIMIT 40 OFFSET {}'''.format((int(page)-1)*40))
+    cur.execute('''SELECT * FROM manga ORDER BY stock = 0, name LIMIT 40 OFFSET {}'''.format((int(page)-1)*40))
     data = cur.fetchall()
     return jsonify(data)
 
